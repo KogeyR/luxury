@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OfferRepository::class)]
+#[ORM\Entity(repositoryClass: OfferRepository::class)] 
 class Offer
 {
     #[ORM\Id]
@@ -41,7 +41,7 @@ class Offer
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'offer')]
-    private ?Application $no = null;
+    private ?Application $application = null;
 
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Category::class)]
     private Collection $category;
@@ -160,14 +160,14 @@ class Offer
         return $this;
     }
 
-    public function getNo(): ?Application
+    public function getapplication(): ?Application
     {
-        return $this->no;
+        return $this->application;
     }
 
-    public function setNo(?Application $no): static
+    public function setapplication(?Application $application): static
     {
-        $this->no = $no;
+        $this->application = $application;
 
         return $this;
     }
