@@ -47,7 +47,10 @@
             "branch": "main",
             "version": "1.0",
             "ref": "efb318193e48384eb5c5aadff15396ed698f8ffc"
-        }
+        },
+        "files": [
+            "./public/.htaccess"
+        ]
     },
     "symfony/console": {
         "version": "6.1",
@@ -263,6 +266,9 @@
         "files": [
             "./config/packages/messenger.yaml"
         ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.14.0"
     },
     "twig/extra-bundle": {
         "version": "v3.7.1"
