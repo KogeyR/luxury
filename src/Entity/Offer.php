@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\OfferRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,25 @@ class Offer
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'offer')]
+    private ?Application $no = null;
+
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Category::class)]
+    private Collection $category;
+
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Client::class)]
+    private Collection $client;
+
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Type::class)]
+    private Collection $jobType;
+
+    public function __construct()
+    {
+        $this->category = new ArrayCollection();
+        $this->client = new ArrayCollection();
+        $this->jobType = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -135,6 +156,108 @@ class Offer
     public function setCreatedAt(?\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getNo(): ?Application
+    {
+        return $this->no;
+    }
+
+    public function setNo(?Application $no): static
+    {
+        $this->no = $no;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategory(): Collection
+    {
+        return $this->category;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->category->contains($category)) {
+            $this->category->add($category);
+            $category->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->category->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getOffer() === $this) {
+                $category->setOffer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Client>
+     */
+    public function getClient(): Collection
+    {
+        return $this->client;
+    }
+
+    public function addClient(Client $client): static
+    {
+        if (!$this->client->contains($client)) {
+            $this->client->add($client);
+            $client->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClient(Client $client): static
+    {
+        if ($this->client->removeElement($client)) {
+            // set the owning side to null (unless already changed)
+            if ($client->getOffer() === $this) {
+                $client->setOffer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Type>
+     */
+    public function getJobType(): Collection
+    {
+        return $this->jobType;
+    }
+
+    public function addJobType(Type $jobType): static
+    {
+        if (!$this->jobType->contains($jobType)) {
+            $this->jobType->add($jobType);
+            $jobType->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeJobType(Type $jobType): static
+    {
+        if ($this->jobType->removeElement($jobType)) {
+            // set the owning side to null (unless already changed)
+            if ($jobType->getOffer() === $this) {
+                $jobType->setOffer(null);
+            }
+        }
 
         return $this;
     }

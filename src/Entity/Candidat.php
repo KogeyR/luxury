@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidatRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -58,6 +60,24 @@ class Candidat
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $userid = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?Gender $gender = null;
+
+    #[ORM\ManyToOne]
+    private ?Category $category = null;
+
+    #[ORM\ManyToMany(targetEntity: Experience::class)]
+    private Collection $experience;
+
+    public function __construct()
+    {
+        $this->experience = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -243,4 +263,66 @@ class Candidat
 
         return $this;
     }
+
+    public function getUserid(): ?User
+    {
+        return $this->userid;
+    }
+
+    public function setUserid(?User $userid): static
+    {
+        $this->userid = $userid;
+
+        return $this;
+    }
+
+    public function getGender(): ?Gender
+    {
+        return $this->gender;
+    }
+
+    public function setGender(?Gender $gender): static
+    {
+        $this->gender = $gender;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperience(): Collection
+    {
+        return $this->experience;
+    }
+
+    public function addExperience(Experience $experience): static
+    {
+        if (!$this->experience->contains($experience)) {
+            $this->experience->add($experience);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): static
+    {
+        $this->experience->removeElement($experience);
+
+        return $this;
+    }
+
+ 
 }
