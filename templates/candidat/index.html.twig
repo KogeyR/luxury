@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidat index{% endblock %}
+
+{% block body %}
+    <h1>Candidat index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Adress</th>
+                <th>Country</th>
+                <th>Nationality</th>
+                <th>IsPassportValid</th>
+                <th>Location</th>
+                <th>BirthAt</th>
+                <th>PlaceOfBirth</th>
+                <th>IsAvailable</th>
+                <th>ShortDescription</th>
+                <th>Notes</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>DeletedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidat in candidats %}
+            <tr>
+                <td>{{ candidat.id }}</td>
+                <td>{{ candidat.firstName }}</td>
+                <td>{{ candidat.lastName }}</td>
+                <td>{{ candidat.adress }}</td>
+                <td>{{ candidat.country }}</td>
+                <td>{{ candidat.nationality }}</td>
+                <td>{{ candidat.isPassportValid ? 'Yes' : 'No' }}</td>
+                <td>{{ candidat.location }}</td>
+                <td>{{ candidat.birthAt ? candidat.birthAt|date('Y-m-d') : '' }}</td>
+                <td>{{ candidat.placeOfBirth }}</td>
+                <td>{{ candidat.isAvailable ? 'Yes' : 'No' }}</td>
+                <td>{{ candidat.shortDescription }}</td>
+                <td>{{ candidat.notes }}</td>
+                <td>{{ candidat.createdAt ? candidat.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ candidat.updatedAt ? candidat.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ candidat.deletedAt ? candidat.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_candidat_show', {'id': candidat.id}) }}">show</a>
+                    <a href="{{ path('app_candidat_edit', {'id': candidat.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="17">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_candidat_new') }}">Create new</a>
+{% endblock %}
