@@ -69,14 +69,17 @@ class Candidat
 
     #[ORM\ManyToOne]
     private ?Category $category = null;
-
-    #[ORM\ManyToMany(targetEntity: Experience::class)]
+    
+    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Experience::class)]
     private Collection $experience;
 
     public function __construct()
     {
         $this->experience = new ArrayCollection();
     }
+
+ 
+
 
 
     public function getId(): ?int
@@ -312,6 +315,7 @@ class Candidat
     {
         if (!$this->experience->contains($experience)) {
             $this->experience->add($experience);
+            $experience->setCandidat($this);
         }
 
         return $this;
@@ -319,10 +323,16 @@ class Candidat
 
     public function removeExperience(Experience $experience): static
     {
-        $this->experience->removeElement($experience);
+        if ($this->experience->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getCandidat() === $this) {
+                $experience->setCandidat(null);
+            }
+        }
 
         return $this;
     }
+
 
  
 }

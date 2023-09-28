@@ -85,7 +85,7 @@ class Application
     {
         if (!$this->offer->contains($offer)) {
             $this->offer->add($offer);
-            $offer->setNo($this);
+            $offer->setApplication($this);
         }
 
         return $this;
@@ -95,8 +95,8 @@ class Application
     {
         if ($this->offer->removeElement($offer)) {
             // set the owning side to null (unless already changed)
-            if ($offer->getNo() === $this) {
-                $offer->setNo(null);
+            if ($offer->getapplication() === $this) {
+                $offer->setapplication(null);
             }
         }
 
