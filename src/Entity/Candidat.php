@@ -64,7 +64,7 @@ class Candidat
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?User $userid = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
     private ?Gender $gender = null;
 
     #[ORM\ManyToOne]

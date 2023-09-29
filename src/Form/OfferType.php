@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OfferType extends AbstractType
+class Offer2Type extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -20,6 +20,7 @@ class OfferType extends AbstractType
             ->add('closingAt')
             ->add('salary')
             ->add('createdAt')
+            ->add('name')
             ->add('application')
         ;
     }

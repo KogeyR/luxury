@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
-use App\Form\OfferType;
+use App\Form\Offer2Type;
 use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class OfferController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $offer = new Offer();
-        $form = $this->createForm(OfferType::class, $offer);
+        $form = $this->createForm(Offer2Type::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -53,7 +53,7 @@ class OfferController extends AbstractController
     #[Route('/{id}/edit', name: 'app_offer_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Offer $offer, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(OfferType::class, $offer);
+        $form = $this->createForm(Offer2Type::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

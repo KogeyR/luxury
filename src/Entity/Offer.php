@@ -52,6 +52,9 @@ class Offer
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Type::class)]
     private Collection $jobType;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $name = null;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -258,6 +261,18 @@ class Offer
                 $jobType->setOffer(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): static
+    {
+        $this->name = $name;
 
         return $this;
     }
