@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
-use App\Form\Offer2Type;
+use App\Form\OfferType;
 use App\Repository\OfferRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class OfferController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $offer = new Offer();
-        $form = $this->createForm(Offer2Type::class, $offer);
+        $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

@@ -16,8 +16,7 @@ class Type
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'jobType')]
-    private ?Offer $offer = null;
+ 
 
     public function getId(): ?int
     {
@@ -36,15 +35,5 @@ class Type
         return $this;
     }
 
-    public function getOffer(): ?Offer
-    {
-        return $this->offer;
-    }
 
-    public function setOffer(?Offer $offer): static
-    {
-        $this->offer = $offer;
-
-        return $this;
-    }
 }

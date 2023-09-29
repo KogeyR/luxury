@@ -43,23 +43,25 @@ class Offer
     #[ORM\ManyToOne(inversedBy: 'offer')]
     private ?Application $application = null;
 
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Category::class)]
-    private Collection $category;
 
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Client::class)]
     private Collection $client;
 
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Type::class)]
-    private Collection $jobType;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
+    #[ORM\ManyToOne]
+    private ?Type $typeId = null;
+
+    #[ORM\ManyToOne]
+    private ?Category $categoryId = null;
+
     public function __construct()
     {
-        $this->category = new ArrayCollection();
+      
         $this->client = new ArrayCollection();
-        $this->jobType = new ArrayCollection();
+       
     }
 
     public function getId(): ?int
@@ -176,34 +178,7 @@ class Offer
     }
 
     /**
-     * @return Collection<int, Category>
-     */
-    public function getCategory(): Collection
-    {
-        return $this->category;
-    }
-
-    public function addCategory(Category $category): static
-    {
-        if (!$this->category->contains($category)) {
-            $this->category->add($category);
-            $category->setOffer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(Category $category): static
-    {
-        if ($this->category->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getOffer() === $this) {
-                $category->setOffer(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     /**
      * @return Collection<int, Client>
@@ -235,36 +210,7 @@ class Offer
         return $this;
     }
 
-    /**
-     * @return Collection<int, Type>
-     */
-    public function getJobType(): Collection
-    {
-        return $this->jobType;
-    }
-
-    public function addJobType(Type $jobType): static
-    {
-        if (!$this->jobType->contains($jobType)) {
-            $this->jobType->add($jobType);
-            $jobType->setOffer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeJobType(Type $jobType): static
-    {
-        if ($this->jobType->removeElement($jobType)) {
-            // set the owning side to null (unless already changed)
-            if ($jobType->getOffer() === $this) {
-                $jobType->setOffer(null);
-            }
-        }
-
-        return $this;
-    }
-
+   
     public function getName(): ?string
     {
         return $this->name;
@@ -273,6 +219,30 @@ class Offer
     public function setName(?string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getTypeId(): ?Type
+    {
+        return $this->typeId;
+    }
+
+    public function setTypeId(?Type $typeId): static
+    {
+        $this->typeId = $typeId;
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?Category
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(?Category $categoryId): static
+    {
+        $this->categoryId = $categoryId;
 
         return $this;
     }

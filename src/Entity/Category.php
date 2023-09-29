@@ -18,8 +18,6 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'category')]
-    private ?Offer $offer = null;
 
    
 
@@ -40,17 +38,6 @@ class Category
         return $this;
     }
 
-    public function getOffer(): ?Offer
-    {
-        return $this->offer;
-    }
-
-    public function setOffer(?Offer $offer): static
-    {
-        $this->offer = $offer;
-
-        return $this;
-    }
 
     
 }
