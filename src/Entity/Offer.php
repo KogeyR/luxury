@@ -44,8 +44,7 @@ class Offer
     private ?Application $application = null;
 
 
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Client::class)]
-    private Collection $client;
+    
 
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -57,10 +56,13 @@ class Offer
     #[ORM\ManyToOne]
     private ?Category $categoryId = null;
 
+    #[ORM\ManyToOne]
+    private ?Client $client = null;
+
     public function __construct()
     {
       
-        $this->client = new ArrayCollection();
+      
        
     }
 
@@ -183,32 +185,6 @@ class Offer
     /**
      * @return Collection<int, Client>
      */
-    public function getClient(): Collection
-    {
-        return $this->client;
-    }
-
-    public function addClient(Client $client): static
-    {
-        if (!$this->client->contains($client)) {
-            $this->client->add($client);
-            $client->setOffer($this);
-        }
-
-        return $this;
-    }
-
-    public function removeClient(Client $client): static
-    {
-        if ($this->client->removeElement($client)) {
-            // set the owning side to null (unless already changed)
-            if ($client->getOffer() === $this) {
-                $client->setOffer(null);
-            }
-        }
-
-        return $this;
-    }
 
    
     public function getName(): ?string
@@ -243,6 +219,18 @@ class Offer
     public function setCategoryId(?Category $categoryId): static
     {
         $this->categoryId = $categoryId;
+
+        return $this;
+    }
+
+    public function getClient(): ?Client
+    {
+        return $this->client;
+    }
+
+    public function setClient(?Client $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
