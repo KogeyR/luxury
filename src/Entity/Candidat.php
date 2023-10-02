@@ -61,8 +61,7 @@ class Candidat
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $deletedAt = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    private ?User $userid = null;
+
 
     #[ORM\ManyToOne(cascade: ['persist', 'remove'])]
     private ?Gender $gender = null;
@@ -72,6 +71,9 @@ class Candidat
     
     #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Experience::class)]
     private Collection $experience;
+
+    #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
+    private ?User $user = null;
 
     public function __construct()
     {
@@ -267,17 +269,6 @@ class Candidat
         return $this;
     }
 
-    public function getUserid(): ?User
-    {
-        return $this->userid;
-    }
-
-    public function setUserid(?User $userid): static
-    {
-        $this->userid = $userid;
-
-        return $this;
-    }
 
     public function getGender(): ?Gender
     {
@@ -329,6 +320,18 @@ class Candidat
                 $experience->setCandidat(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
