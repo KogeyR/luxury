@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidat;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\AppCustomAuthenticator;
@@ -34,7 +35,11 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
-            // do anything else you need here, like send an email
+
+            $candidat = (new Candidat);
+            $entityManager->persist($candidat);
+            $entityManager->flush();
+           
 
             return $userAuthenticator->authenticateUser(
                 $user,
