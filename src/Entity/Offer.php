@@ -44,11 +44,6 @@ class Offer
     private ?Application $application = null;
 
 
-    
-
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $name = null;
 
     #[ORM\ManyToOne]
     private ?Type $typeId = null;
@@ -186,18 +181,6 @@ class Offer
      * @return Collection<int, Client>
      */
 
-   
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(?string $name): static
-    {
-        $this->name = $name;
-
-        return $this;
-    }
 
     public function getTypeId(): ?Type
     {
