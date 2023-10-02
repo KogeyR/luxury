@@ -102,8 +102,8 @@
                             <ul>
                                 <li><a href={{path('app_home')}}>Home</a></li>
                                 <li><a href={{path('app_offer_index')}}>Jobs Offers</a></li>
-                                {# <li><a href={{path('')}}>About Us</a></li> #}
-                                {# <li><a href={{path('')}}>Contact</a></li> #}
+                                <li><a href={{path('app_about')}}>About Us</a></li> 
+                                 <li><a href={{path('app_contact')}}>Contact</a></li> 
                                 <li>-</li>
                                 <li><a href={{path('app_candidat_index')}}>Profile</a></li>
                                 <li><a href={{path('app_logout')}}>Logout</a></li>
@@ -133,19 +133,19 @@
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href={{path('app_offer_index')}}>
+                            <a target="_self" href="{{path('app_offer_index')}}">
                                 <i class=""></i>
                                 <span>Jobs offers</span>
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href="/templates/compagny.html">
+                            <a target="_self" href="{{path('app_about')}}">
                                 <i class=""></i>
                                 <span>About us</span>
                             </a>
                         </li>
                         <li class=" dropdown">
-                            <a target="_self" href="/templates/contact.html">
+                            <a target="_self" href="{{path('app_contact')}}">
                                 <i class=""></i>
                                 <span>Contact</span>
                             </a>

@@ -264,11 +264,11 @@
                 </div>
             </div>
         </section>
-        <section id="job-offers" class="section-padding gray-bg">
+                 <section id="job-offers" class="section-padding gray-bg">
             <div class="container">
                 <div class="text-center mb-40">
-                    <h2 class="section-title">Job offers</h2>
-                    <p class="section-sub">Just like our candidates, we offer quality, serious & reliable positions. Come discover them and we will put you in contact with the perfect team for you to form the perfect crew.</p>
+                    <h2 class="section-title">We have the perfect job for you</h2>
+                    <p class="section-sub">just like our candidates, we offer quality, serious & reliable job offers.</p>
                 </div>
                 <div class="portfolio-container">
 
@@ -283,9 +283,9 @@
                         <li class=" waves-effect waves-light" data-group="management">Management & HR</li>
                     </ul>
                     <div class="portfolio portfolio-with-title col-2 gutter mt-30">
+                    {% for offer in offers %}
 
                         <div class="portfolio-item" data-groups='["all", "commercial"]'>
-                            {% for offer in offers %}
                             <div class="portfolio-wrapper">
                                 <div class="card job-card">
                                     <div class="card-content">
@@ -304,30 +304,20 @@
                                                 <i class="material-icons">&#xE55F;</i>{{ offer.jobLocation }}
                                             </div>
                                         </div>
-                                        <p class="truncate-text">{{ offer.description }}</p>
+                                        <p class="truncate-text"{{ offer.description }}></p>
                                     </div>
                                     <div class="card-action">
-                                        <a class="btn btn-md primary border waves-effect waves-dark" href={{path('app_offer_show', {'id': offer.id})}}>Details</a>
+                                        <a class="btn btn-md primary border waves-effect waves-dark" href="{{path('app_offer_show', {'id': offer.id})}}">Details</a>
                                         <a class="btn btn-md primary waves-effect waves-light" href="#!">Apply</a>
                                     </div>
                                 </div>
-                                {% endfor %}
                             </div>
                         </div>
-
-
+                       
+              {% endfor %}
                         <div class="no-item"></div>
-
-                    </div>
-
-                    <div class="text-center">
-                        <a href="/templates/jobs/index.html" class="btn gradient secondary waves-effect waves-light mt-30">View all job offers</a>
                     </div>
                 </div>
             </div>
         </section>
-
-    </div>
-
-</div>
 {% endblock %}
