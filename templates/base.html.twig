@@ -105,9 +105,8 @@
                                 <li><a href={{path('app_about')}}>About Us</a></li> 
                                  <li><a href={{path('app_contact')}}>Contact</a></li> 
                                 <li>-</li>
-                               
                                 {% if app.user %}
-                                
+                                <li><a href={{path("app_candidat_show", {'id': app.user.candidat.id})}}>Profile</a></li>
                                 <li><a href={{path('app_logout')}}>Logout</a></li>
                                 {% endif %}
                             </ul>
