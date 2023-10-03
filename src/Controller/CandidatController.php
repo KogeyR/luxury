@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 #[Route('/candidat')]
 class CandidatController extends AbstractController
@@ -42,12 +43,21 @@ class CandidatController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_candidat_show', methods: ['GET'])]
-    public function show(Candidat $candidat): Response
+    #[Route('/profil', name: 'app_candidat_show', methods: ['GET'])]
+    public function show(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
-        return $this->render('candidat/show.html.twig', [
-            'candidat' => $candidat,
+        $form = $this->createForm(CandidatType::class, $security->getUser()->getCandidat());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $entityManager->flush();
+        }
+
+        return $this->renderForm('candidat/show.html.twig', [
+            'form' => $form->createView(),
         ]);
+        
     }
 
     #[Route('/{id}/edit', name: 'app_candidat_edit', methods: ['GET', 'POST'])]
@@ -56,7 +66,11 @@ class CandidatController extends AbstractController
         $form = $this->createForm(CandidatType::class, $candidat);
         $form->handleRequest($request);
 
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+
+
             $entityManager->flush();
 
             return $this->redirectToRoute('app_candidat_index', [], Response::HTTP_SEE_OTHER);

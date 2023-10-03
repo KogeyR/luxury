@@ -27,7 +27,7 @@ class CandidatType extends AbstractType
             ->add('notes')     
             ->add('updatedAt')
             ->add('user')
-            ->add('gender', GenderType::class)
+            ->add('gender')
             ->add('category')
         ;
     }

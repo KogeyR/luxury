@@ -13,7 +13,7 @@ class GenderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('gender', EntityType::class, [
+        ->add('name', EntityType::class, [
             'class' => Gender::class,
             'choice_label' => 'name',
         ])
