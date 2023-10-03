@@ -55,32 +55,29 @@
                     <div class="row">
                         <h3 class="text-extrabold">Your personal informations</h3>
                         <div class="col-xs-12 col-sm-6 col-md-4">
-                            <div class="input-field">
-                                <select id="gender" name="gender">
-                                    <option value="">Choose an option...</option>
-                                    <option value="male">Male</option>
-                                    <option value="female" selected="selected">Female</option>
-                                </select>
+                            <div class="input-field">  
+                                    {{form_widget(form.gender)}}
+                               
                                 <label for="gender" class="active">Gender</label>
                             </div>
                         </div>
                         <div class="clearfix visible-sm"></div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                <input type="text" class="form-control" name="first_name" id="first_name" value="" required>
-                                <label for="first_name">First name</label>
+                                {# <input type="text" class="form-control" name="first_name" id="first_name" value="" required> #}
+                                <label for="first_name">{{form_widget(form.firstName)}}</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                <input type="text" class="form-control" name="last_name" id="last_name" value="" required>
-                                <label for="last_name">Last name</label>
+                                {# <input type="text" class="form-control" name="last_name" id="last_name" value="" required> #}
+                                <label for="last_name">{{form_widget(form.lastName)}}</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-4">
                             <div class="input-field">
-                                <input required="required" id="current_location" name="current_location" type="text" value="">
-                                <label for="current_location">Current location</label>
+                                {# <input required="required" id="current_location" name="current_location" type="text" value=""> #}
+                                <label for="current_location">{{form_widget(form.location)}}</label>
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-8">

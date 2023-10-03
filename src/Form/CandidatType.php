@@ -33,6 +33,7 @@ class CandidatType extends AbstractType
             ->add('user')
             ->add('gender')
             ->add('category')
+            ->add('experience')
         ;
     }
 
