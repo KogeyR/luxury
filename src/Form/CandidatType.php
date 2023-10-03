@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Gender;
 use App\Entity\Candidat;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,12 +24,10 @@ class CandidatType extends AbstractType
             ->add('placeOfBirth')
             ->add('isAvailable')
             ->add('shortDescription')
-            ->add('notes')
-            ->add('createdAt')
+            ->add('notes')     
             ->add('updatedAt')
-            ->add('deletedAt')
-            ->add('userid')
-            ->add('gender')
+            ->add('user')
+            ->add('gender', GenderType::class)
             ->add('category')
         ;
     }
