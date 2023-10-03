@@ -55,7 +55,8 @@ class CandidatController extends AbstractController
         }
 
         return $this->renderForm('candidat/show.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
+            'candidat' => $security->getUser()->getCandidat(),
         ]);
         
     }
