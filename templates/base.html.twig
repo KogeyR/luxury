@@ -115,6 +115,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="menuzord-menu pull-right light" role="navigation">
+                {% if app.user == null %}
                         <li class=" dropdown">
                             <a target="_self" href="{{path('app_login')}}">
                                 <span>Login</span>
@@ -124,9 +125,29 @@
                             <a target="_self" href="{{path('app_register')}}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
                                 <span>Sign Up</span>
                             </a>
-
                         </li>
+                         {% endif %}
                     </ul>
+
+                       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="menuzord-menu pull-right light" role="navigation">
+                {% if app.user == true %}
+                        <li class=" dropdown">
+                            <a target="_self" href="{{path("app_candidat_show", {'id': app.user.candidat.id})}}">
+                                <span>Profil</span>
+                            </a>
+                        </li>
+                        <li class=" dropdown">
+                            <a target="_self" href="{{path('app_logout')}}" class="btn bn-lg gradient secondary btn-block waves-effect waves-light btn-register">
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                        {% endif %}
+                    </ul>
+
+                    
+
+
                     <ul class="menuzord-menu pull-right light" role="navigation">
                         <li class="active dropdown">
                             <a target="_self" href="{{path('app_home')}}">
