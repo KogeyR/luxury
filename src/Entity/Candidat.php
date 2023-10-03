@@ -68,12 +68,13 @@ class Candidat
 
     #[ORM\ManyToOne]
     private ?Category $category = null;
-    
-    #[ORM\OneToMany(mappedBy: 'candidat', targetEntity: Experience::class)]
-    private Collection $experience;
+
 
     #[ORM\OneToOne(inversedBy: 'candidat', cascade: ['persist', 'remove'])]
     private ?User $user = null;
+
+    #[ORM\ManyToOne(inversedBy: 'candidats')]
+    private ?Experience $experience = null;
 
     public function __construct()
     {
@@ -294,35 +295,7 @@ class Candidat
         return $this;
     }
 
-    /**
-     * @return Collection<int, Experience>
-     */
-    public function getExperience(): Collection
-    {
-        return $this->experience;
-    }
-
-    public function addExperience(Experience $experience): static
-    {
-        if (!$this->experience->contains($experience)) {
-            $this->experience->add($experience);
-            $experience->setCandidat($this);
-        }
-
-        return $this;
-    }
-
-    public function removeExperience(Experience $experience): static
-    {
-        if ($this->experience->removeElement($experience)) {
-            // set the owning side to null (unless already changed)
-            if ($experience->getCandidat() === $this) {
-                $experience->setCandidat(null);
-            }
-        }
-
-        return $this;
-    }
+   
 
     public function getUser(): ?User
     {
@@ -332,6 +305,18 @@ class Candidat
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getExperience(): ?Experience
+    {
+        return $this->experience;
+    }
+
+    public function setExperience(?Experience $experience): static
+    {
+        $this->experience = $experience;
 
         return $this;
     }

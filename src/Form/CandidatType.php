@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Gender;
 use App\Entity\Candidat;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -20,7 +21,10 @@ class CandidatType extends AbstractType
             ->add('nationality')
             ->add('isPassportValid')
             ->add('location')
-            ->add('birthAt')
+            ->add('birthAt', DateType::class, [
+                'html5' => true,
+                'widget' => 'single_text',
+            ])
             ->add('placeOfBirth')
             ->add('isAvailable')
             ->add('shortDescription')

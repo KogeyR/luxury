@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ExperienceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
@@ -18,6 +20,14 @@ class Experience
 
     #[ORM\ManyToOne(inversedBy: 'experience')]
     private ?Candidat $candidat = null;
+
+    #[ORM\OneToMany(mappedBy: 'experience', targetEntity: Candidat::class)]
+    private Collection $candidats;
+
+    public function __construct()
+    {
+        $this->candidats = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -44,6 +54,36 @@ class Experience
     public function setCandidat(?Candidat $candidat): static
     {
         $this->candidat = $candidat;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidat>
+     */
+    public function getCandidats(): Collection
+    {
+        return $this->candidats;
+    }
+
+    public function addCandidat(Candidat $candidat): static
+    {
+        if (!$this->candidats->contains($candidat)) {
+            $this->candidats->add($candidat);
+            $candidat->setExperience($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidat(Candidat $candidat): static
+    {
+        if ($this->candidats->removeElement($candidat)) {
+            // set the owning side to null (unless already changed)
+            if ($candidat->getExperience() === $this) {
+                $candidat->setExperience(null);
+            }
+        }
 
         return $this;
     }
