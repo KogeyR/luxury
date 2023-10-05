@@ -76,14 +76,12 @@ class Candidat
     #[ORM\ManyToOne(inversedBy: 'candidats')]
     private ?Experience $experience = null;
 
-    public function __construct()
-    {
-        $this->experience = new ArrayCollection();
-    }
+    // public function __construct()
+    // {
+    //     $this->experience = new ArrayCollection();
+    // }
 
  
-
-
 
     public function getId(): ?int
     {
