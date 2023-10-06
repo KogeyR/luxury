@@ -43,7 +43,7 @@ class CandidatController extends AbstractController
         ]);
     }
 
-    #[Route('/profil', name: 'app_candidat_show', methods: ['GET'])]
+    #[Route('/profil', name: 'app_candidat_show', methods: ['GET', 'POST'])]
     public function show(Request $request, EntityManagerInterface $entityManager, Security $security): Response
     {
         $form = $this->createForm(CandidatType::class, $security->getUser()->getCandidat());
