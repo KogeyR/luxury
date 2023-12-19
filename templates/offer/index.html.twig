@@ -42,7 +42,8 @@
                     <div class="portfolio portfolio-with-title col-2 gutter mt-30">
                     {% for offer in offers %}
 
-                        <div class="portfolio-item" data-groups='["all", "commercial"]'>
+                        <div class="portfolio-item" data-groups='["all", "{{offer.categoryId.name|split(' ')[0]|lower}}"]'>
+
                             <div class="portfolio-wrapper">
                                 <div class="card job-card">
                                     <div class="card-content">
